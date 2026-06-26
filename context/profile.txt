@@ -1,0 +1,13 @@
+I’m Ronnie Gu, a student from Richmond Hill, Ontario, with a strong interest in technology, engineering, and problem-solving. I moved from Shanghai to Canada in 2019 and have since become heavily involved in both academics and extracurricular activities. I enjoy taking on challenging projects, learning new skills, and finding ways to turn ideas into real products.
+
+Academically, I have consistently pursued advanced coursework and independent learning opportunities. Beyond my regular classes, I have self-studied AP subjects including Calculus BC, Computer Science A, Physics, and Chinese. I enjoy mathematics, physics, computer science, and engineering because they combine logical thinking with creativity and practical application.
+
+Outside the classroom, I am passionate about software development. I have built projects ranging from iOS applications and web platforms to computer vision systems and game development projects. Through hackathons, personal projects, and internships, I have gained experience with technologies such as Java, Python, Swift, JavaScript, SQL, Flask, Laravel, Spring Boot, OpenCV, and Git. I particularly enjoy building full-stack applications that solve real-world problems.
+
+Leadership and community involvement are also important parts of my life. I currently serve as Co-President of the YRChess Association, where I help organize tournaments, community events, and outreach programs. Working with volunteers, coordinating teams, and improving event experiences has taught me valuable lessons about communication, organization, and leadership.
+
+Music has been another major part of my journey. As Principal Clarinetist in my school's Wind Ensemble, I lead a section of musicians and contribute to performances, chamber groups, and orchestral ensembles. Music has strengthened my discipline, attention to detail, and ability to collaborate with others toward a common goal.
+
+I also enjoy mentoring and teaching. Through my work as a Code Ninjas instructor, I have taught programming concepts to children and helped them develop confidence in technology. Seeing students understand a difficult concept or successfully complete a project is one of the most rewarding experiences I have had.
+
+Looking ahead, I hope to pursue a career in software engineering and technology, where I can combine technical expertise, creativity, and leadership to build impactful solutions. Whether through engineering, entrepreneurship, or community initiatives, I aim to continuously learn, contribute, and create opportunities that make a meaningful difference for others.
