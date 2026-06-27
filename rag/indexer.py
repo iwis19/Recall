@@ -12,13 +12,13 @@ class Indexer:
         )
 
     def index_information(self, paths: list[str]):
-
         all_chunks = []
         for path in paths:
             file_path = Path(path)
             with open(file=file_path, encoding="utf-8") as f:
                 content = f.read()
 
+            # split larger files into smaller chunks so retrieval can find the most relevant parts
             chunks = self.recursive_splitter.split_text(content)
 
             all_chunks.extend(chunks)

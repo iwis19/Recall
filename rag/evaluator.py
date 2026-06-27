@@ -1,4 +1,4 @@
-# for later
+# for future
 class Evaluator:
 
     def __init__(self):

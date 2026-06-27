@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
-import ollama
 from flasgger import Swagger
 from rag.rag_pipeline import RAGPipeline
+from utils.rag_guardrail import filter_question
 
 
 """
@@ -12,26 +12,36 @@ goal:
 """
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = ""
+app.config['MAX_CONTENT_LENGTH'] = 16*1000*1000 # 16 mb
+
 Swagger(app)
 
 rag_pipeline = RAGPipeline()
 
 @app.route("/")
 def home():
-    return "Hallo, supposed to be home page"
+    return "Hallo, supposed to be home page..."
 
 @app.get("/ask")
 def ask():
-    
     question = request.args.get("question")
+    return rag_pipeline.ask(question=filter_question(question=question))
 
-    if not question:
-        return {"Error": "Please enter a question!"}, 400
+@app.get("/ask")
+def ask_page():
+    return render_template("ask_page.html")
 
-    #rag_pipeline methods etc
+@app.get("/upload")
+def upload_page():
+    return render_template("upload_page.html")
 
-    #return response["message"]["content"]
-
+@app.post("/upload")
+def upload_file():
+    rag_pipeline.insert_info(["context/profile.txt"])
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+# run cmd: .venv\Scripts\python.exe -m flask --app app:app --debug run
