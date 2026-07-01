@@ -8,6 +8,12 @@
 <body>
     <h1>Ask anything!</h1>
 
+    <form action="/ask/api" method="POST">
+        <label for="question">Type in a question!</label>
+        <input type="text" name="question" placeholder="Ask anything" id="question">
+        <input type="submit" name="Submit">
+    </form>
+
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
@@ -15,5 +21,11 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
+
+    <div>
+        {% if response %}
+            {{ response }}
+        {% endif %}
+    </div>
 </body>
 </html>

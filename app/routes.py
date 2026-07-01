@@ -11,14 +11,15 @@ rag_pipeline = RAGPipeline()
 def home():
     return "Hallo, supposed to be home page..."
 
-@app.get("/api/ask")
-def ask():
-    question = request.args.get("question")
-    return rag_pipeline.ask(question=filter_question(question=question))
+@app.post("/ask/api")
+def ask_question():
+    question = request.form.get("question")
+    response = rag_pipeline.ask(question=filter_question(question=question))
+    return render_template("ask_page.html", response=response)
 
 @app.get("/ask")
 def ask_page():
-    return render_template("ask_page.html")
+    return render_template("ask_page.html", response=None)
 
 @app.get("/context")
 def context_page():
