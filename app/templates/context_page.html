@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload New File</title>
+</head>
+<body>
+    <h1>Context Management</h1>
+    
+    <form action="/context/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="pdfs" value="Choose a File" accept=".pdf" multiple>
+        <input type="submit" value="Submit">
+    </form>
+
+    <br>
+
+    <form action="/context/delete" method="POST">
+        <input type="hidden">
+        <button type="submit" name="delete">Clear Knowledge Base</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+    
+        {% if messages %}
+
+        <br>
+
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+
+    <br>
+
+    <a href="{{ url_for('ask_page') }}">Go to Ask</a>
+
+</body>
+</html>

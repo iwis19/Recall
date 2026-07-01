@@ -11,8 +11,8 @@ class RAGPipeline:
         self.retriever = Retriever(self.datastore)
         self.response_generator = ResponseGenerator()
 
-    def insert_info(self, file_paths: list[str]):
-        chunks = self.indexer.index_information(paths=file_paths)
+    def insert_info(self, info: str):
+        chunks = self.indexer.index_information(info=info)
         self.datastore.build_collection(chunks=chunks)
     
     def ask(self, question: str) -> str:
@@ -23,3 +23,6 @@ class RAGPipeline:
         answer = self.response_generator.generate_response(context=context, question=question)
         
         return answer
+    
+    def delete_info(self):
+        self.datastore.clear_collection()
