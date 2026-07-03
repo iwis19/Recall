@@ -15,11 +15,11 @@ def home():
 def ask_question():
     question = request.form.get("question")
     response = rag_pipeline.ask(question=filter_question(question=question))
-    return render_template("ask_page.html", response=response)
+    return {"response": response}
 
 @app.get("/ask")
 def ask_page():
-    return render_template("ask_page.html", response=None)
+    return render_template("ask_page.html")
 
 @app.get("/context")
 def context_page():
