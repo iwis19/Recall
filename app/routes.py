@@ -37,7 +37,11 @@ def upload_file():
 
     for i, pdf in enumerate(pdfs):
         if is_pdf_file(pdf.filename):
-            rag_pipeline.insert_info(info=extract_pdf(pdf.read()))
+            info = extract_pdf(pdf.read())
+            if not info:
+                flash(f"Upload for {pdf.filename} failed as it was corrupted.")
+                continue
+            rag_pipeline.insert_info(info=info)
             flash(f"Successfully uploaded file {i+1}: {pdf.filename}")
         else:
             flash(f"Upload for {pdf.filename} failed, please try again.")
@@ -50,6 +54,15 @@ def delete_context():
 
     flash("Successfully cleared the vector database!")
     return redirect(url_for("context_page"))
+
+@app.post("/context/warmup")
+def warmup_embedding():
+    try:
+        rag_pipeline.warm_up_embedding()
+        return "", 204
+    except:
+        return {"error", "Embed warmup failed"}
+
 
 if __name__ == "__main__":
     app.run(debug=True)

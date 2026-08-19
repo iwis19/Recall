@@ -2,19 +2,38 @@ import chromadb
 from chromadb.utils.embedding_functions.ollama_embedding_function import OllamaEmbeddingFunction
 from chromadb.config import Settings
 
+import ollama
+
 class Datastore:
 
     def __init__(self):
+        self.ollama_url = "http://localhost:11434"
+        self.embedding_model_name = "nomic-embed-text:latest"
+
         # PersistentClient saves the vector database to disk, so indexed data survives app restarts
         self.client = chromadb.PersistentClient(path="./chroma_db", settings=Settings(allow_reset=True))
+
         # chroma uses this embedding function to turn text into vectors when adding or querying documents
         self.embedding_function = OllamaEmbeddingFunction(
-            url="http://localhost:11434",
-            model_name="nomic-embed-text:latest"
+            url=self.ollama_url,
+            model_name=self.embedding_model_name
         )
+
         self.collection = self.client.get_or_create_collection(
             name="collection",
             embedding_function=self.embedding_function
+        )
+
+        self.ollama_client = ollama.Client(
+            host=self.ollama_url
+        )
+
+    # warm up embedding model, does not add anything to chromadb, only returns a vec
+    def warm_embedding_model(self):
+        self.ollama_client.embed(
+            model=self.embedding_model_name,
+            input="warmup",
+            keep_alive="10m"
         )
         
     def get_collection(self):

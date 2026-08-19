@@ -28,3 +28,6 @@ class RAGPipeline:
     
     def delete_info(self):
         self.datastore.clear_collection()
+
+    def warm_up_embedding(self):
+        self.datastore.warm_embedding_model()
