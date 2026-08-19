@@ -32,3 +32,10 @@ class Datastore:
         all_ids = self.collection.get()["ids"]
         if all_ids:
             self.collection.delete(ids=all_ids)
+
+    def is_empty(self):
+        return self.collection.count() == 0
+
+# testing
+# ds = Datastore()
+# print(ds.get_collection())

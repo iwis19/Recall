@@ -6,25 +6,24 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Ask anything!</h1>
+    <h1></h1>
 
-    <!-- <form action="/ask/api" method="POST">
-        <label for="question">Type in a question!</label>
-        <input type="text" name="question" placeholder="Ask anything" id="question">
-        <input type="submit" name="Submit">
-    </form> -->
-
-    <form id="question_submission">
-        <label for="question">Type in a question!</label>
-        <input type="text" name="question" placeholder="Ask anything" id="question">
-        <input type="submit" name="Submit">
+    <form id="ask-form">
+        <label for="question-input">Type in a question!</label>
+        <input
+            id="question-input"
+            type="text"
+            name="question"
+            placeholder="Ask anything"
+        >
+        <input
+            id="ask-submit-button"
+            type="submit"
+        >
     </form>
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-
-        <br>
-
             {% for message in messages %}
                 <p>{{ message }}</p>
             {% endfor %}
@@ -33,13 +32,7 @@
 
     <br>
 
-    <!-- <div>
-        {% if response %}
-            {{ response }}
-        {% endif %}
-    </div> -->
-
-    <div id="answer"></div>
+    <div id="answer-output"></div>
 
     <script src="static/js/ask.js"></script>
 

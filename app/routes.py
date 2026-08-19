@@ -2,22 +2,26 @@ from flask import request, render_template, flash, redirect, url_for
 
 from app import app
 from rag.rag_pipeline import RAGPipeline
-from rag.guardrail import filter_question
+from rag.guardrail import normalize_question
 from app.form import *
 
 rag_pipeline = RAGPipeline()
 
-@app.route("/")
-def home():
-    return "Hallo, supposed to be home page..."
+# @app.route("/")
+# def home():
+#     return "Hallo, supposed to be home page..."
 
 @app.post("/ask/api")
 def ask_question():
     question = request.form.get("question")
-    response = rag_pipeline.ask(question=filter_question(question=question))
+    response = rag_pipeline.ask(question=normalize_question(question=question))
+
+    if isinstance(response, tuple):
+        return response
+
     return {"response": response}
 
-@app.get("/ask")
+@app.get("/")
 def ask_page():
     return render_template("ask_page.html")
 
@@ -34,9 +38,9 @@ def upload_file():
     for i, pdf in enumerate(pdfs):
         if is_pdf_file(pdf.filename):
             rag_pipeline.insert_info(info=extract_pdf(pdf.read()))
-            flash(f"Successfully uploaded file {i}, filename is {pdf.filename}")
+            flash(f"Successfully uploaded file {i+1}: {pdf.filename}")
         else:
-            flash(f"Upload for {pdf.filename} failed, please upload a valid PDF file.")
+            flash(f"Upload for {pdf.filename} failed, please try again.")
     return redirect(url_for("context_page"))     # sends me to the page routed to the "context_page" method, in this case is @app.get("/context")
 
 @app.post("/context/delete")
@@ -46,7 +50,6 @@ def delete_context():
 
     flash("Successfully cleared the vector database!")
     return redirect(url_for("context_page"))
-
 
 if __name__ == "__main__":
     app.run(debug=True)

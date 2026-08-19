@@ -1,19 +1,46 @@
-const form = document.getElementById('question_submission');
-const answerDiv = document.getElementById('answer')
+const askForm = document.getElementById('ask-form');
+const answerOutput = document.getElementById('answer-output');
+const submitButton = document.getElementById('ask-submit-button');
 
-form.addEventListener('submit', async function (event) {
+askForm.addEventListener("submit", async function (event) {
+    /*
+    a form has built in browser behavior, so when submitted, the browser:
+
+    - reads form fields
+    - sends them using action and method
+    - navigates or reloads the resulting page
+    */
     event.preventDefault();
 
-    const formData = new FormData(form);
-    answerDiv.textContent = "Thinking...";
+    const formData = new FormData(askForm);
 
-    const response = await fetch("/ask/api", {
-        method: "POST",
-        body: formData
-    });
+    let loadingDotCount = 0;
+    const defaultLoadingText = "Thinking";
 
-    const data = await response.json();
-    
-    answerDiv.textContent = data.response;
+    function incrementDot() {
+        loadingDotCount = loadingDotCount % 3 + 1
+        answerOutput.textContent = `${defaultLoadingText}${".".repeat(loadingDotCount)}`
+    }
+
+    incrementDot();
+    const dotInterval = setInterval(incrementDot, 500);
+    submitButton.disabled = true;
+
+    try {
+        const response = await fetch("/ask/api", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        answerOutput.textContent = response.ok ? data.response : data.error;
+    } catch {
+        answerOutput.textContent = "Could not reach the server."
+    } finally {
+        clearInterval(dotInterval)
+        loadingDotCount = 0
+        submitButton.disabled = false;
+    }
+
 });
-

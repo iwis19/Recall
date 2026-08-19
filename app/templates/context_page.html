@@ -8,34 +8,44 @@
 <body>
     <h1>Context Management</h1>
     
-    <form action="/context/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="pdfs" value="Choose a File" accept=".pdf" multiple>
-        <input type="submit" value="Submit">
+    <form id="context-upload-form" action="/context/upload" method="POST" enctype="multipart/form-data">
+        <input
+            id="pdf-files-input"
+            type="file"
+            name="pdfs"
+            accept=".pdf"
+            multiple
+        >
+        <input
+            id="context-upload-button"
+            type="submit"
+        >
     </form>
 
     <br>
 
-    <form action="/context/delete" method="POST">
-        <input type="hidden">
-        <button type="submit" name="delete">Clear Knowledge Base</button>
+    <form id="context-delete-form" action="/context/delete" method="POST">
+        <button type="submit">Clear Knowledge Base</button>
     </form>
 
     {% with messages = get_flashed_messages() %}
-    
         {% if messages %}
-
-        <br>
-
             {% for message in messages %}
                 <p>{{ message }}</p>
             {% endfor %}
         {% endif %}
     {% endwith %}
     
+    <br>
+
+    <div id="upload-status"></div>
+
+    <script src="static/js/context.js"></script>
 
     <br>
 
     <a href="{{ url_for('ask_page') }}">Go to Ask</a>
+
 
 </body>
 </html>

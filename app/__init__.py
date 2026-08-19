@@ -6,8 +6,7 @@ from app.form import *
 """
 goal:
 
-- have a terminal page -> like powershell / claude, upload file button on top right, sleek design
-- have a normal page -> regular upload, regular answers, etc
+- use this temp rag system to test things out for now, features will be a research papers rag search + relation nodes
 """
 
 """

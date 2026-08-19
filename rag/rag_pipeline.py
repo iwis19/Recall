@@ -16,8 +16,10 @@ class RAGPipeline:
         self.datastore.build_collection(chunks=chunks)
     
     def ask(self, question: str) -> str:
-        if not question:
-            return {"Error": "Please enter a question"}, 400
+
+        # guards
+        if not question: return ({"error": "Please enter a question."}, 400)
+        if self.datastore.is_empty(): return ({"error": "There is currently no information in the database."}, 400)
         
         context = self.retriever.search_context(question=question)
         answer = self.response_generator.generate_response(context=context, question=question)

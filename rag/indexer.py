@@ -14,6 +14,7 @@ class Indexer:
     def index_information(self, info: str):
         return self.recursive_splitter.split_text(info)
 
+
     
 
 
