@@ -6,7 +6,7 @@ Barebones RAG engine built with Python, Flask, &amp; Ollama; repo for personal r
 
 ## Repository Note
 
-Intentionally manually composed the pipeline was LangChain would wrap the same operations in abstractions and give me less control over other features I want to have for another project.
+Intentionally manually composed the pipeline was LangChain would wrap the same operations in abstractions and give me less control over other features I want to have for [another project](https://github.com/iwis19/GitTrace).
 
 ---
 
