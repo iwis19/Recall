@@ -15,6 +15,5 @@ def extract_pdf(uploaded_file):
     except Exception:
         return None
 
-
 def is_pdf_file(file_name: str):
     return "." in file_name and file_name.split(".")[-1].lower() == "pdf"

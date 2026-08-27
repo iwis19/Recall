@@ -1,6 +1,8 @@
-const askForm = document.getElementById('ask-form');
-const answerOutput = document.getElementById('answer-output');
-const submitButton = document.getElementById('ask-submit-button');
+import { requireElement } from "./shared/dom";
+
+const askForm = requireElement<HTMLFormElement>('#ask-form');
+const answerOutput = requireElement<HTMLDivElement>('#answer-output');
+const submitButton = requireElement<HTMLInputElement>('#ask-submit-button');
 
 askForm.addEventListener("submit", async function (event) {
     /*
@@ -18,8 +20,8 @@ askForm.addEventListener("submit", async function (event) {
     const defaultLoadingText = "Thinking";
 
     function incrementDot() {
-        loadingDotCount = loadingDotCount % 3 + 1
-        answerOutput.textContent = `${defaultLoadingText}${".".repeat(loadingDotCount)}`
+        loadingDotCount = loadingDotCount % 3 + 1;
+        answerOutput.textContent = `${defaultLoadingText}${".".repeat(loadingDotCount)}`;
     }
 
     incrementDot();

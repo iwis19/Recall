@@ -1,18 +1,19 @@
-const uploadForm = document.getElementById('context-upload-form')
-const uploadButton = document.getElementById('context-upload-button')
+import { requireElement } from "./shared/dom";
 
-const uploadStatus = document.getElementById('upload-status')
+const uploadForm = requireElement<HTMLFormElement>('#context-upload-form');
+const uploadButton = requireElement<HTMLInputElement>('#context-upload-button');
+const uploadStatus = requireElement<HTMLDivElement>('#upload-status');
 
 fetch("/context/warmup", {
     method: "POST"
 }).then(function (response) {
     if (!response.ok) {
-        console.error("Unable to warmup embedding function")
+        console.error("Unable to warmup embedding function");
     } else {
-        console.log("Successfully warmed up embeddings")
+        console.log("Successfully warmed up embeddings");
     }
 }).catch(function (error){
-    console.error("Could not reach warmup endpoint")
+    console.error("Could not reach warmup endpoint", error);
 });
 
 uploadForm.addEventListener('submit', function() {
