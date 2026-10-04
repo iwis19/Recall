@@ -7,7 +7,7 @@ import ollama
 class Datastore:
 
     def __init__(self):
-        self.ollama_url = "http://localhost:11434"
+        self.ollama_url = "http://ollama:11434"
         self.embedding_model_name = "nomic-embed-text:latest"
 
         # PersistentClient saves the vector database to disk, so indexed data survives app restarts

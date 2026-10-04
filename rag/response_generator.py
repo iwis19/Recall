@@ -13,6 +13,7 @@ class ResponseGenerator:
 
     def __init__(self, model: str = "qwen2.5:3b"):
         self.model = model
+        self.client = ollama.Client(host="http://ollama:11434")
 
     def generate_response(self, context: str, question: str):
         user_prompt = f"""
@@ -21,7 +22,7 @@ class ResponseGenerator:
             Question: {question}
         """
 
-        response = ollama.chat(
+        response = self.client.chat(
             model=self.model,
             messages=[
                 {"role": "system", "content": self.SYSTEM_COMMAND},

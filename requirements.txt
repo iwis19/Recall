@@ -1,0 +1,6 @@
+flask
+flasgger
+pypdf
+chromadb
+ollama
+langchain-text-splitters
