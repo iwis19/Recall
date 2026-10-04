@@ -26,6 +26,34 @@ Intentionally manually composed the pipeline was LangChain would wrap the same o
 - ChromaDB
 - Ollama
 - HTML/CSS/TS
+- Docker
+
+---
+
+## Setup
+
+This project runs with Docker Compose since `ollama` and `recall` are split into two separate services.
+
+<br>
+
+Build and start the services:
+```bash 
+docker compose up -d --build
+```
+
+Pull embedding model:
+```bash 
+docker compose exec ollama ollama pull nomic-embed-text
+```
+
+Then pull a small qwen model for answering:
+```bash 
+docker compose exec ollama ollama pull qwen2.5:3b
+```
+
+<br>
+
+Open at [localhost:8080/context](http://localhost:8080/context)
 
 ---
 
